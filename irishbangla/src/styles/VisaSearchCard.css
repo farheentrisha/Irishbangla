@@ -1,0 +1,107 @@
+:root {
+  --primary: #1a9c3d;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  font-family: "Mulish", sans-serif;
+}
+
+.visa-wrapper {
+  position: absolute;
+  bottom: -48px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.visa-card {
+  background: #ffffff;
+  width: 90%;
+  max-width: 1100px;
+  padding: 22px 24px;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 1.3fr 1.3fr 1.1fr auto;
+  gap: 18px;
+  box-shadow: var(--shadow);
+}
+
+.visa-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.visa-input label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.visa-input select {
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.visa-input select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Button – professional, not bulky */
+.visa-btn {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: not-allowed;
+  background: #d1d5db;
+  color: #ffffff;
+  transition: all 0.25s ease;
+  align-self: flex-end;
+}
+
+.visa-btn.active {
+  background: var(--primary);
+  cursor: pointer;
+}
+
+.visa-btn.active:hover {
+  background: #158233;
+}
+
+/* Flag option */
+.flag-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.flag-option img {
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .visa-card {
+    grid-template-columns: 1fr;
+  }
+
+  .visa-btn {
+    width: 100%;
+  }
+}
