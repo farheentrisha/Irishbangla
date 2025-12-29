@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 import "../styles/VisaSearchCard.css";
 
+// Country options
 const countries = [
   { value: "BD", label: "Bangladesh", flag: "https://flagcdn.com/w20/bd.png" },
   { value: "IN", label: "India", flag: "https://flagcdn.com/w20/in.png" },
@@ -9,6 +11,7 @@ const countries = [
   { value: "IE", label: "Ireland", flag: "https://flagcdn.com/w20/ie.png" },
 ];
 
+// Format react-select options with flag
 const formatOptionLabel = ({ label, flag }) => (
   <div className="flag-option">
     <img src={flag} alt={label} />
@@ -16,6 +19,7 @@ const formatOptionLabel = ({ label, flag }) => (
   </div>
 );
 
+// Custom react-select styles
 const selectStyles = {
   control: (base) => ({
     ...base,
@@ -23,7 +27,7 @@ const selectStyles = {
     borderRadius: 10,
     borderColor: "#e2e8f0",
     fontFamily: "Mulish",
-    boxShadow: "none",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
     "&:hover": { borderColor: "#1a9c3d" },
   }),
   singleValue: (base) => ({
@@ -39,12 +43,21 @@ export default function VisaSearchCard() {
   const [destination, setDestination] = useState(null);
   const [visaType, setVisaType] = useState("");
 
+  const navigate = useNavigate();
+
   const isFormValid = citizen && destination && visaType;
+
+  const handleSubmit = () => {
+    if (!isFormValid) return;
+
+    navigate("/visa-details", {
+      state: { citizen, destination, visaType },
+    });
+  };
 
   return (
     <div className="visa-wrapper">
       <div className="visa-card">
-
         <div className="visa-input">
           <label>I am a citizen of</label>
           <Select
@@ -69,7 +82,10 @@ export default function VisaSearchCard() {
 
         <div className="visa-input">
           <label>Visa category</label>
-          <select value={visaType} onChange={(e) => setVisaType(e.target.value)}>
+          <select
+            value={visaType}
+            onChange={(e) => setVisaType(e.target.value)}
+          >
             <option value="">Select visa type</option>
             <option>Tourist Visa</option>
             <option>Student Visa</option>
@@ -80,10 +96,10 @@ export default function VisaSearchCard() {
         <button
           className={`visa-btn ${isFormValid ? "active" : ""}`}
           disabled={!isFormValid}
+          onClick={handleSubmit}
         >
-          Check details
+          Check Details
         </button>
-
       </div>
     </div>
   );

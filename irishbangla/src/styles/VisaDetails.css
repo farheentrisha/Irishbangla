@@ -1,0 +1,179 @@
+.visa-details-page {
+  font-family: "Mulish", sans-serif;
+  background: #f5f7fb;
+  min-height: 100vh;
+  padding-top: 40px; /* ✅ pushes everything downward */
+}
+
+
+/* HEADER */
+.visa-header {
+  background: linear-gradient(135deg, #00875a, #491d6e);
+  padding: 48px 24px 56px; /* more breathing room */
+  color: #fff;
+  border-radius: 0 0 24px 24px; /* modern separation */
+}
+
+
+.visa-header h1 {
+  max-width: 1200px;
+  margin: auto;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* STEPS */
+.visa-steps {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.step {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.step.active {
+  background: #ffffff;
+  color: #00875a;
+  font-weight: 600;
+}
+
+.step.highlight {
+  background: #5ebd00;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* CONTENT */
+.visa-content {
+  max-width: 1200px;
+  margin: 60px auto 40px; /* ✅ more downward spacing */
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  gap: 28px;
+}
+
+
+/* MAIN */
+.visa-main {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.visa-main h2 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* DOCUMENT ACCORDION */
+.doc-accordion {
+  border-top: 1px solid #e5e7eb;
+}
+
+.doc-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.doc-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.doc-title span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #00875a;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+}
+
+.doc-item p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* SIDEBAR */
+.visa-sidebar {
+  background: linear-gradient(180deg, #491d6e, #00875a);
+  color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  height: fit-content;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.visa-sidebar h4 {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* PRICE */
+.price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.currency {
+  font-size: 18px;
+}
+
+.amount {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+/* FEES */
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.fee-row.total {
+  font-weight: 700;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* BUTTON */
+.primary-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #5ebd00;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
