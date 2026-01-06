@@ -66,9 +66,16 @@ export default function Hero() {
                 <button className="btn-primary">
                   Book a Consultation
                 </button>
-                <button className="btn-secondary">
-                  Explore Services
-                </button>
+                <button
+  className="btn-secondary"
+  onClick={() => {
+    const section = document.getElementById("services");
+    section && section.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  Explore Services
+</button>
+
               </div>
 
               <div className="hero-trust">

@@ -6,13 +6,16 @@ import ThinkingTrip from "./components/thinkingtrip";
 import Inspiration from "./components/Inspiration";
 import VisaSearchCard from "./components/VisaSearchCard";
 import VisaDetails from "./pages/VisaDetails";
+import Services from "./components/Service";
 
 function Home() {
   return (
     <>
       <Hero />
       <VisaSearchCard />
+
       <ThinkingTrip />
+      <Services />
       <Inspiration />
     </>
   );

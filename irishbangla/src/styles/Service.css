@@ -1,0 +1,139 @@
+/* SECTION */
+.services-section {
+  display: flex;
+  gap: 50px;
+  padding: 80px 6%;
+  background: linear-gradient(180deg, #f6faf8, #ffffff);
+  align-items: flex-start;
+}
+
+/* LEFT CONTENT */
+.services-left {
+  flex: 1;
+  position: sticky;
+  top: 120px;
+}
+
+.services-left h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.services-left p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.services-left button {
+  padding: 14px 30px;
+  background: #00875a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.services-left button:hover {
+  background: #006f49;
+  transform: translateY(-2px);
+}
+
+/* GRID */
+.services-grid {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 26px;
+}
+
+/* CARD */
+.service-card {
+  background: #ffffff;
+  padding: 26px;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Floating animation */
+.service-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Decorative gradient glow */
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(94, 189, 0, 0.12),
+    rgba(254, 172, 30, 0.12),
+    rgba(0, 135, 90, 0.12)
+  );
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+/* ICON */
+.icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 14px;
+  z-index: 1;
+  position: relative;
+}
+
+/* TEXT */
+.service-card h4 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  z-index: 1;
+  position: relative;
+}
+
+.service-card p {
+  font-size: 14.5px;
+  color: #666;
+  line-height: 1.6;
+  z-index: 1;
+  position: relative;
+}
+
+/* ------------------ MOBILE RESPONSIVE ------------------ */
+@media (max-width: 900px) {
+  .services-section {
+    flex-direction: column;
+    padding: 60px 20px;
+  }
+
+  .services-left {
+    position: relative;
+    top: auto;
+    text-align: center;
+  }
+
+  .services-left button {
+    margin: auto;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
