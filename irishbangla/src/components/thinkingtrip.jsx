@@ -1,4 +1,4 @@
-import "../styles/ThinkingTrip.css";
+import "../styles/thinkingtrip.css";
 import img1 from "../assets/hero/belfest.jpg";
 import img2 from "../assets/hero/cliffs.jpg";
 import img3 from "../assets/hero/other.jpg";
