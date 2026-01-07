@@ -7,13 +7,13 @@ import Inspiration from "./components/Inspiration";
 import VisaSearchCard from "./components/VisaSearchCard";
 import VisaDetails from "./pages/VisaDetails";
 import Services from "./components/Service";
+import TrackerPage from "./pages/TrackerPage";
 
 function Home() {
   return (
     <>
       <Hero />
       <VisaSearchCard />
-
       <ThinkingTrip />
       <Services />
       <Inspiration />
@@ -29,6 +29,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/visa-details" element={<VisaDetails />} />
+
+        {/* ✅ ADD THIS */}
+        <Route path="/track/:trackingId" element={<TrackerPage />} />
       </Routes>
     </Router>
   );
