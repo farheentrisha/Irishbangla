@@ -8,6 +8,7 @@ import VisaSearchCard from "./components/VisaSearchCard";
 import VisaDetails from "./pages/VisaDetails";
 import Services from "./components/Service";
 import TrackerPage from "./pages/TrackerPage";
+import ContactSection from "./components/contact";
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <ThinkingTrip />
       <Services />
       <Inspiration />
+      <ContactSection />
     </>
   );
 }

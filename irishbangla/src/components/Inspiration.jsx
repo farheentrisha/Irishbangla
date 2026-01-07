@@ -1,10 +1,58 @@
+import { useState } from "react";
 import "../styles/Inspiration.css";
-import img1 from "../assets/hero/belfest.jpg";
+
+import niImg from "../assets/hero/belfest.jpg";
+import dublinImg from "../assets/hero/cliffs.jpg";
+import wildImg from "../assets/hero/other.jpg";
+import ancientImg from "../assets/hero/belfest.jpg";
+import heartImg from "../assets/hero/other.jpg";
+
+const places = {
+  "Northern Ireland": {
+    image: niImg,
+    title: "Northern Ireland",
+    description:
+      "Amazing cliff-walks, Game of Thrones® adventures, Titanic attractions – let Northern Ireland stir your soul.",
+    button: "Embrace a Giant Spirit →",
+  },
+  "Dublin": {
+    image: dublinImg,
+    title: "Dublin",
+    description:
+      "A lively capital filled with literary legends, cosy pubs, historic streets and modern energy.",
+    button: "Discover Dublin →",
+  },
+  "Wild Atlantic Way": {
+    image: wildImg,
+    title: "Wild Atlantic Way",
+    description:
+      "Rugged coastlines, dramatic cliffs and endless ocean views along one of the world’s longest coastal routes.",
+    button: "Explore the Wild →",
+  },
+  "Ireland's Ancient East": {
+    image: ancientImg,
+    title: "Ireland's Ancient East",
+    description:
+      "Step into 5,000 years of history through castles, monasteries and medieval towns.",
+    button: "Travel Back in Time →",
+  },
+  "Ireland's Hidden Heartlands": {
+    image: heartImg,
+    title: "Hidden Heartlands",
+    description:
+      "Slow down and explore Ireland’s peaceful lakes, rivers and charming countryside.",
+    button: "Find Your Calm →",
+  },
+};
 
 export default function Inspiration() {
+  const [activePlace, setActivePlace] = useState("Northern Ireland");
+
+  const place = places[activePlace];
+
   return (
     <>
-     {/* INSPIRATION SECTION */}
+      {/* INSPIRATION SECTION */}
       <section className="inspiration">
         <h2>Looking for inspiration?</h2>
         <p>
@@ -14,43 +62,43 @@ export default function Inspiration() {
         </p>
 
         <div className="tabs">
-          <button className="tab">Wild Atlantic Way</button>
-          <button className="tab active">Northern Ireland</button>
-          <button className="tab">Dublin</button>
-          <button className="tab">Ireland's Ancient East</button>
-          <button className="tab">Belfast</button>
-          <button className="tab">Ireland's Hidden Heartlands</button>
+          {Object.keys(places).map((name) => (
+            <button
+              key={name}
+              className={`tab ${activePlace === name ? "active" : ""}`}
+              onClick={() => setActivePlace(name)}
+            >
+              {name}
+            </button>
+          ))}
         </div>
       </section>
+
       {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-content">
-          <img
-            src={img1}
-            alt="Northern Ireland"
-            className="hero-logo"
-          />
+      {/* HERO / PLACE SHOWCASE */}
+<section className="place-showcase">
+  {/* Big Image */}
+  <div className="place-image">
+    <img src={place.image} alt={place.title} />
+  </div>
 
-          <p className="hero-text">
-            Amazing cliff-walks, Game of Thrones® adventures, Titanic
-            attractions – let Northern Ireland stir your soul.
-          </p>
+  {/* Overlapping Card */}
+  <div className="place-card">
+    <h3>{place.title}</h3>
 
-          <button className="hero-btn">
-            Embrace a Giant Spirit →
-          </button>
-        </div>
+    <p>{place.description}</p>
 
-        <div className="hero-image-wrapper">
-          <img
-            src={img1}
-            alt="Giant’s Causeway"
-            className="hero-image"
-          />
-        </div>
-      </section>
+    <div className="place-tags">
+      <span className="tag green">Nature & Adventure</span>
+      <span className="tag">Local Tours</span>
+      <span className="tag">Cultural Sites</span>
+      <span className="tag">City Visits</span>
+    </div>
 
-     
+    <button className="hero-btn">{place.button}</button>
+  </div>
+</section>
+
     </>
   );
 }
