@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect, useState } from "react";
+import { touristVisaTimeline } from "../data/touristVisaTimeline";
 import "../styles/tracker.css";
 
 export default function TrackerPage() {
@@ -22,7 +23,6 @@ export default function TrackerPage() {
           setData(snap.data());
         }
       } catch (err) {
-        console.error(err);
         setError("Something went wrong");
       } finally {
         setLoading(false);
@@ -32,10 +32,14 @@ export default function TrackerPage() {
     fetchTracker();
   }, [trackingId]);
 
-  if (loading) return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
-  if (error) return <h2 style={{ textAlign: "center" }}>{error}</h2>;
+  if (loading) return <h2 className="center">Loading...</h2>;
+  if (error) return <h2 className="center">{error}</h2>;
 
-  const steps = data?.steps ? Object.entries(data.steps) : [];
+  // 🔥 AUTO PROGRESS LOGIC
+  const steps = touristVisaTimeline.map(step => ({
+    ...step,
+    completed: step.id <= data.currentStep
+  }));
 
   return (
     <div className="tracker-page">
@@ -48,16 +52,20 @@ export default function TrackerPage() {
         <p><strong>Status:</strong> {data?.status}</p>
       </div>
 
+      {/* TIMELINE */}
       <div className="timeline">
-        {steps.map(([label, completed], index) => (
+        {steps.map((step) => (
           <div
-            key={index}
-            className={`timeline-item ${completed ? "done" : ""}`}
+            key={step.id}
+            className={`timeline-item ${step.side} ${step.completed ? "done" : ""}`}
           >
-            <span className="dot"></span>
-            <div className="content">
-              <p>{label}</p>
+            {/* Content */}
+            <div className={`content ${step.final ? "final" : ""}`}>
+              <h4>{step.title}</h4>
             </div>
+
+            {/* Dot */}
+            <span className={`dot ${step.completed ? "success" : ""}`} />
           </div>
         ))}
       </div>
