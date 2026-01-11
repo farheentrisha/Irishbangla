@@ -9,6 +9,7 @@ import VisaDetails from "./pages/VisaDetails";
 import Services from "./components/Service";
 import TrackerPage from "./pages/TrackerPage";
 import ContactSection from "./components/contact";
+import AboutUs from "./components/aboutus";
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <ThinkingTrip />
       <Services />
       <Inspiration />
+      <AboutUs />
       <ContactSection />
     </>
   );
