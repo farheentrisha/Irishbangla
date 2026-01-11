@@ -22,7 +22,7 @@ export default function TrackerPage() {
         } else {
           setData(snap.data());
         }
-      } catch (err) {
+      } catch {
         setError("Something went wrong");
       } finally {
         setLoading(false);
@@ -35,47 +35,109 @@ export default function TrackerPage() {
   if (loading) return <h2 className="center">Loading...</h2>;
   if (error) return <h2 className="center">{error}</h2>;
 
-  // 🔥 AUTO PROGRESS LOGIC
-  const steps = touristVisaTimeline.map(step => ({
-    ...step,
-    completed: step.id <= data.currentStep
-  }));
+  // show only completed / started steps
+  const activeSteps = touristVisaTimeline.filter(
+    step => step.id <= data.currentStep
+  );
+
+  const formatDate = (ts) =>
+    ts?.toDate ? ts.toDate().toLocaleDateString() : "";
 
   return (
-    <div className="tracker-page">
-      <h1>Visa Application Status</h1>
+    <div className="page-with-navbar">
+      <div className="tracker-container">
 
-      <div className="card">
-        <h3>{data?.Name}</h3>
-        <p><strong>Tracking ID:</strong> {trackingId}</p>
-        <p><strong>Country:</strong> {data?.country}</p>
-        <p><strong>Status:</strong> {data?.status}</p>
-      </div>
+        {/* LEFT PANEL */}
+        <aside className="applicant-panel">
+          <h3>Applicant Details</h3>
 
-      {/* TIMELINE */}
-      <div className="timeline">
-        {steps.map((step) => (
-          <div
-            key={step.id}
-            className={`timeline-item ${step.side} ${step.completed ? "done" : ""}`}
-          >
-            {/* Content */}
-            <div className={`content ${step.final ? "final" : ""}`}>
-              <h4>{step.title}</h4>
+          <div className="applicant-card">
+            <div className="avatar">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="Applicant"
+              />
             </div>
 
-            {/* Dot */}
-            <span className={`dot ${step.completed ? "success" : ""}`} />
+            <div className="basic-info">
+              <h4>{data.Name}</h4>
+              <p>{trackingId}</p>
+              <p>{data.passport || "N/A"}</p>
+            </div>
           </div>
-        ))}
-      </div>
 
-      <p className="updated">
-        Last Updated:{" "}
-        {data?.lastUpdated?.toDate
-          ? data.lastUpdated.toDate().toLocaleDateString()
-          : "N/A"}
-      </p>
+          <div className="info-block">
+            <label>Selected Country</label>
+            <div className="value">🇮🇪 {data.country}</div>
+          </div>
+
+          <div className="info-block">
+            <label>Service</label>
+            <div className="value">Ireland – Study Visa</div>
+          </div>
+
+          <div className="info-block">
+            <label>Visa Category</label>
+            <div className="value">Study Visa</div>
+          </div>
+
+          <div className="info-block">
+            <label>Travel Date</label>
+            <div className="value">
+              {data.travelDate || "Invalid Date"}
+            </div>
+          </div>
+        </aside>
+
+        {/* RIGHT PANEL */}
+        <section className="process-panel">
+
+          <div className="process-header">
+            <h2>Visa Process</h2>
+          </div>
+
+          {/* HORIZONTAL STEPPER */}
+          <div className="horizontal-steps">
+            {activeSteps.map(step => (
+              <div className="step" key={step.id}>
+                <div className="step-box">
+                  <h5>{step.title}</h5>
+                  <span>{formatDate(data.steps?.[step.id])}</span>
+                </div>
+                <div className="step-icon">✔</div>
+              </div>
+            ))}
+          </div>
+
+          {/* VERTICAL TIMELINE */}
+          {/* VERTICAL TIMELINE */}
+<div className="vertical-log">
+  <span className="vertical-line" />
+
+  {activeSteps.map(step => {
+    const isActive = step.id === data.currentStep;
+
+    return (
+      <div
+        className={`log-row ${isActive ? "active" : ""}`}
+        key={step.id}
+      >
+        <span className={`log-dot ${isActive ? "active" : ""}`} />
+
+        <div className={`log-card ${isActive ? "active" : ""}`}>
+          <span className="log-date">
+            {formatDate(data.steps?.[step.id])}
+          </span>
+          <p>{step.description || step.title}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+
+        </section>
+      </div>
     </div>
   );
 }

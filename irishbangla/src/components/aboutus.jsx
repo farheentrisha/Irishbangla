@@ -52,13 +52,6 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Bangladesh highlight */}
-        <div className="about-highlight">
-          <h3>Promoting Beautiful Bangladesh</h3>
-          <p>
-            As a pioneer in inbound tourism, we proudly promote the “Beautiful Bangladesh” brand to the world with experienced guides fluent in English, Spanish and Chinese.
-          </p>
-        </div>
 
         {/* Vision & Mission */}
         <div className="about-vm">
