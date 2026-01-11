@@ -35,9 +35,11 @@ export default function TrackerPage() {
   if (loading) return <h2 className="center">Loading...</h2>;
   if (error) return <h2 className="center">{error}</h2>;
 
-  // show only completed / started steps
+  /* ================= LOGIC ================= */
+
+  // show only started/completed steps
   const activeSteps = touristVisaTimeline.filter(
-    step => step.id <= data.currentStep
+    (step) => step.id <= data.currentStep
   );
 
   const formatDate = (ts) =>
@@ -47,7 +49,7 @@ export default function TrackerPage() {
     <div className="page-with-navbar">
       <div className="tracker-container">
 
-        {/* LEFT PANEL */}
+        {/* ================= LEFT PANEL ================= */}
         <aside className="applicant-panel">
           <h3>Applicant Details</h3>
 
@@ -89,52 +91,68 @@ export default function TrackerPage() {
           </div>
         </aside>
 
-        {/* RIGHT PANEL */}
+        {/* ================= RIGHT PANEL ================= */}
         <section className="process-panel">
 
           <div className="process-header">
-            <h2>Visa Process</h2>
+            <h2>Track Your Visa Process</h2>
           </div>
 
-          {/* HORIZONTAL STEPPER */}
+          {/* ================= HORIZONTAL STEPPER ================= */}
           <div className="horizontal-steps">
-            {activeSteps.map(step => (
-              <div className="step" key={step.id}>
-                <div className="step-box">
-                  <h5>{step.title}</h5>
-                  <span>{formatDate(data.steps?.[step.id])}</span>
+            {activeSteps.map((step) => {
+              const isFinal = step.final === true;
+
+              return (
+                <div className="step" key={step.id}>
+                  <div className={`step-box ${isFinal ? "final" : ""}`}>
+                    <h5>{step.title}</h5>
+                    <span>{formatDate(data.steps?.[step.id])}</span>
+                  </div>
+
+                  <div className={`step-icon ${isFinal ? "final" : ""}`}>
+                    ✔
+                  </div>
                 </div>
-                <div className="step-icon">✔</div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* VERTICAL TIMELINE */}
-          {/* VERTICAL TIMELINE */}
-<div className="vertical-log">
-  <span className="vertical-line" />
+          {/* ================= VERTICAL TIMELINE ================= */}
+          <div className="vertical-log">
+            <span className="vertical-line" />
 
-  {activeSteps.map(step => {
-    const isActive = step.id === data.currentStep;
+            {activeSteps.map((step) => {
+              const isActive = step.id === data.currentStep;
+              const isFinal = step.final === true;
 
-    return (
-      <div
-        className={`log-row ${isActive ? "active" : ""}`}
-        key={step.id}
-      >
-        <span className={`log-dot ${isActive ? "active" : ""}`} />
+              return (
+                <div
+                  key={step.id}
+                  className={`log-row 
+                    ${isActive ? "active" : ""} 
+                    ${isFinal ? "final" : ""}`}
+                >
+                  <span
+                    className={`log-dot 
+                      ${isActive ? "active" : ""} 
+                      ${isFinal ? "final" : ""}`}
+                  />
 
-        <div className={`log-card ${isActive ? "active" : ""}`}>
-          <span className="log-date">
-            {formatDate(data.steps?.[step.id])}
-          </span>
-          <p>{step.description || step.title}</p>
-        </div>
-      </div>
-    );
-  })}
-</div>
-
+                  <div
+                    className={`log-card 
+                      ${isActive ? "active" : ""} 
+                      ${isFinal ? "final" : ""}`}
+                  >
+                    <span className="log-date">
+                      {formatDate(data.steps?.[step.id])}
+                    </span>
+                    <p>{step.description || step.title}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
 
         </section>
       </div>
