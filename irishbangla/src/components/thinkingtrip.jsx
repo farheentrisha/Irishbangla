@@ -24,6 +24,7 @@ const trips = [
     desc: "Explore Ireland responsibly with eco-friendly travel tips and experiences.",
     btn: "Go green in Ireland",
     img: img3,
+    link: "/sustainable-ireland",
   },
 ];
 

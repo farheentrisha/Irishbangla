@@ -11,6 +11,9 @@ import TrackerPage from "./pages/TrackerPage";
 import ContactSection from "./components/contact";
 import AboutUs from "./components/aboutus";
 import IrelandTravelProcess from "./components/IrelandTravelProcess";
+import Footer from "./components/Footer";
+import SustainableIreland from "./pages/SustainableIreland";
+
 
 function Home() {
   return (
@@ -22,6 +25,7 @@ function Home() {
       <Inspiration />
       <AboutUs />
       <ContactSection />
+      <Footer />
     </>
   );
 }
@@ -42,6 +46,11 @@ function App() {
           path="/ireland-travel-process"
           element={<IrelandTravelProcess />}
         />
+        <Route
+  path="/sustainable-ireland"
+  element={<SustainableIreland />}
+/>
+
       </Routes>
     </Router>
   );
