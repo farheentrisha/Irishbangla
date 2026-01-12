@@ -1,0 +1,140 @@
+.ireland-visa-page {
+  font-family: system-ui, sans-serif;
+  color: #222;
+}
+
+/* HERO */
+.visa-hero {
+  background: linear-gradient(135deg, #00875a, #dbfb8e);
+  padding: 80px 16px;
+  text-align: center;
+  color: white;
+}
+
+.visa-hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+}
+
+.visa-hero p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+/* SECTION */
+.visa-section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 60px 16px;
+}
+
+.soft-bg {
+  background: #f6fff9;
+}
+
+.visa-section h2 {
+  margin-bottom: 24px;
+}
+
+.visa-section h2 span {
+  color: #00875a;
+}
+
+/* HIGHLIGHT */
+.highlight-box {
+  background: #ffce55;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+
+/* PROCESS */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.process-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.process-card span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00875a;
+}
+
+/* CATEGORIES */
+.category-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.category-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  border-left: 5px solid #00875a;
+}
+
+.highlight-card {
+  border-left-color: #fb6e52;
+}
+
+/* DOCS */
+.doc-list {
+  display: grid;
+  gap: 10px;
+  padding-left: 18px;
+}
+
+.note {
+  margin-top: 16px;
+  color: #fb6e52;
+}
+
+/* INFO BOX */
+.info-box {
+  background: #dbfb8e;
+  padding: 24px;
+  border-radius: 14px;
+}
+
+/* TIMELINE */
+.timeline-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 24px;
+}
+
+.timeline-grid div {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* CTA */
+.visa-cta {
+  text-align: center;
+  padding: 80px 16px;
+  background: #00875a;
+  color: white;
+}
+
+.primary-btn {
+  margin-top: 20px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 30px;
+  background: #ffce55;
+  font-size: 1rem;
+  cursor: pointer;
+}

@@ -72,7 +72,7 @@
   border-radius: 10px;
   border: 2px solid #1a9c3c;
   background: transparent;
-  color: #1a9c3c;
+
   font-weight: 600;
   cursor: pointer;
   transition: all 0.35s ease;
@@ -85,10 +85,7 @@
 }
 
 /* PRIMARY BUTTON */
-.btn.primary {
-  background: #1a9c3c;
-  color: #fff;
-}
+
 
 .btn.primary:hover {
   background: #157a2f;
@@ -123,7 +120,7 @@
   padding: 36px;
   width: 520px;
   border-radius: 16px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 25px 60px rgba(19, 222, 77, 0.12);
 }
 
 .place-card h3 {

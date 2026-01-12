@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "../styles/thinkingtrip.css";
 import img1 from "../assets/hero/belfest.jpg";
 import img2 from "../assets/hero/cliffs.jpg";
@@ -9,6 +10,7 @@ const trips = [
     desc: "We help you find the perfect flight or ferry route for a smooth journey to Ireland.",
     btn: "Travelling to Ireland",
     img: img1,
+    link: "/ireland-travel-process",
   },
   {
     title: "Ireland’s weather",
@@ -26,6 +28,8 @@ const trips = [
 ];
 
 export default function ThinkingTrip() {
+  const navigate = useNavigate();
+
   return (
     <section className="thinking-trip">
       <h2>Thinking of a trip to Ireland?</h2>
@@ -41,7 +45,10 @@ export default function ThinkingTrip() {
               <h3>{item.title}</h3>
               <p>{item.desc}</p>
 
-              <button className={item.primary ? "btn primary" : "btn"}>
+              <button
+                className={item.primary ? "btn primary" : "btn"}
+                onClick={() => item.link && navigate(item.link)}
+              >
                 {item.btn}
               </button>
             </div>

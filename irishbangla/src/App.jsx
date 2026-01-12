@@ -10,6 +10,7 @@ import Services from "./components/Service";
 import TrackerPage from "./pages/TrackerPage";
 import ContactSection from "./components/contact";
 import AboutUs from "./components/aboutus";
+import IrelandTravelProcess from "./components/IrelandTravelProcess";
 
 function Home() {
   return (
@@ -36,6 +37,11 @@ function App() {
 
         {/* ✅ ADD THIS */}
         <Route path="/track/:trackingId" element={<TrackerPage />} />
+        <Route path="/" element={<ThinkingTrip />} />
+        <Route
+          path="/ireland-travel-process"
+          element={<IrelandTravelProcess />}
+        />
       </Routes>
     </Router>
   );
