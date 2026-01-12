@@ -1,4 +1,18 @@
 import "../styles/irelandTravel.css";
+import { motion } from "framer-motion";
+import {
+  FaPassport,
+  FaFileAlt,
+  FaUniversity,
+  FaClock,
+  FaUserCheck,
+  FaGraduationCap,
+} from "react-icons/fa";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function IrelandTravelProcess() {
   return (
@@ -6,167 +20,248 @@ export default function IrelandTravelProcess() {
 
       {/* HERO */}
       <section className="visa-hero">
-        <h1>Ireland Visa from Bangladesh</h1>
-        <p>
-          Complete Visa Processing Support with Personalized Guidance
-        </p>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.7 }}
+        >
+          <h1>Ireland Visa from Bangladesh</h1>
+          <p>Complete Visa Processing Support with Personalized Guidance</p>
+        </motion.div>
       </section>
 
       {/* INTRO */}
       <section className="visa-section">
-        <h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <span>Ireland Visa</span> | We Process Ireland Visa from Bangladesh
-        </h2>
+        </motion.h2>
 
-        <p>
-          It is not easy to get an Ireland visa from Bangladesh due to the remote
-          location of its embassy. Currently, all Bangladeshi nationals must
-          process their visa applications through the Embassy of Ireland in
-          New Delhi.
-        </p>
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Getting an Ireland visa from Bangladesh is challenging due to the
+          remote location of the Irish Embassy. All Bangladeshi nationals must
+          submit applications via the Embassy of Ireland in New Delhi.
+        </motion.p>
 
-        <p className="highlight-box">
-          Our team offers an end-to-end solution to make the process easy.
-          Simply submit your passport and documents at our Dhaka office —
-          we forward them to the Embassy of Ireland, New Delhi, and manage the
-          process on your behalf.
-        </p>
+        <motion.div
+          className="highlight-box"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <FaPassport />
+          <p>
+            Submit your passport and documents in Dhaka. We forward them to New
+            Delhi and manage the entire process for you.
+          </p>
+        </motion.div>
       </section>
 
       {/* PROCESS */}
       <section className="visa-section soft-bg">
-        <h2>Process of Ireland Visa Application</h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Process of Ireland Visa Application
+        </motion.h2>
 
         <div className="process-grid">
-          <div className="process-card">
-            <span>01</span>
-            <h3>Online Application</h3>
-            <p>
-              All Bangladeshi applicants must complete the official Irish
-              Online Visa Application Form through INIS.
-            </p>
-          </div>
-
-          <div className="process-card">
-            <span>02</span>
-            <h3>Summary & Documents</h3>
-            <p>
-              After submission, a summary application sheet is generated.
-              This must be submitted along with your passport and supporting
-              documents.
-            </p>
-          </div>
-
-          <div className="process-card">
-            <span>03</span>
-            <h3>Embassy Processing</h3>
-            <p>
-              We forward your documents securely to the Embassy of Ireland in
-              New Delhi and continuously track the application.
-            </p>
-          </div>
+          {[
+            {
+              icon: <FaFileAlt />,
+              title: "Online Application",
+              text:
+                "Applicants must complete the official Irish Online Visa Application Form via INIS.",
+            },
+            {
+              icon: <FaUserCheck />,
+              title: "Documents & Summary",
+              text:
+                "Submit the generated summary sheet along with passport and supporting documents.",
+            },
+            {
+              icon: <FaUniversity />,
+              title: "Embassy Processing",
+              text:
+                "Documents are forwarded to the Embassy of Ireland in New Delhi for assessment.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              className="process-card"
+              key={i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15 }}
+            >
+              <div className="icon">{item.icon}</div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* VISA CATEGORIES */}
       <section className="visa-section">
-        <h2>Visa Categories of Ireland</h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Visa Categories of Ireland
+        </motion.h2>
 
         <div className="category-grid">
-          <div className="category-card">
-            <h3>Short Stay Visa (Less than 90 Days)</h3>
+          <motion.div
+            className="category-card"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <FaClock />
+            <h3>Short Stay Visa</h3>
             <p>
-              Business, Conference, Tourist, Visit Family/Friends, Transit,
-              Exam, Internship, Join Ship, Medical Treatment, Training,
-              Tournament and more.
+              Business, Tourist, Conference, Visit Family/Friends, Exam,
+              Medical, Training and more (≤ 90 days).
             </p>
-          </div>
+          </motion.div>
 
-          <div className="category-card">
-            <h3>Long Stay Visa (More than 90 Days)</h3>
+          <motion.div
+            className="category-card"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <FaUniversity />
+            <h3>Long Stay Visa</h3>
             <p>
-              Employment Visa, Scientific Researcher Visa, Join Family Visa
-              and related categories.
+              Employment, Scientific Researcher, Join Family and other long-term
+              categories.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="category-card highlight-card">
+          <motion.div
+            className="category-card highlight-card"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <FaGraduationCap />
             <h3>Student Visa</h3>
             <p>
-              We provide comprehensive admission and visa support for Irish
-              student visas from Bangladesh.
+              Complete admission and visa processing support for Irish student
+              visas.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* DOCUMENTS */}
       <section className="visa-section soft-bg">
-        <h2>Common Supporting Documents</h2>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Common Supporting Documents
+        </motion.h2>
 
-        <ul className="doc-list">
-          <li>Original passport with all previous passports</li>
-          <li>Online visa application summary page</li>
-          <li>Two recent passport-size photographs (35mm × 45mm)</li>
-          <li>Cover letter explaining purpose, duration and expenses</li>
-          <li>Invitation letter (if applicable)</li>
-          <li>NOC / Forwarding letter from employer</li>
-          <li>Trade license or business registration documents</li>
-          <li>Flight itinerary and accommodation proof</li>
-          <li>Medical & travel insurance</li>
-          <li>Bank statements for last 6 months</li>
-        </ul>
-
-        <p className="note">
-          ⚠️ All documents must be in English or translated and notarized.
-        </p>
-      </section>
-
-      {/* FINANCIAL */}
-      <section className="visa-section">
-        <h2>Employment & Financial Documents</h2>
-
-        <div className="info-box">
-          <p>
-            Salary statements or pay slips for the last 6 months, duly signed
-            by the employer, are required.
-          </p>
-          <p>
-            Income Tax Return or Tax Certificate (English or notarized
-            translation) is strongly recommended.
-          </p>
-          <p>
-            Marriage certificate and children’s birth certificates may be
-            provided where applicable.
-          </p>
-        </div>
+        <motion.ul
+          className="doc-list"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <li>Original passport with previous passports</li>
+          <li>Online visa summary application page</li>
+          <li>Two passport-size photographs</li>
+          <li>Cover letter explaining purpose and expenses</li>
+          <li>Invitation / NOC / Employer letter (if applicable)</li>
+          <li>Bank statement & financial proof (last 6 months)</li>
+        </motion.ul>
       </section>
 
       {/* FEES & TIME */}
-      <section className="visa-section soft-bg">
-        <h2>Fees & Processing Time</h2>
-
-        <p>
-          Visa fees vary depending on visa category and level of assistance.
-          Please contact our team for exact fees and charges.
-        </p>
+      <section className="visa-section">
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Fees & Processing Time
+        </motion.h2>
 
         <div className="timeline-grid">
-          <div>Visit Visa: ~20 working days</div>
-          <div>Study Visa: ~6 weeks</div>
-          <div>Business Visa: 3–7 working days</div>
-          <div>Critical Skills Employment: ~10 working days</div>
+          {[
+            "Visit Visa: ~20 working days",
+            "Study Visa: ~6 weeks",
+            "Business Visa: 3–7 working days",
+            "Critical Skills Employment: ~10 working days",
+          ].map((t, i) => (
+            <motion.div
+              key={i}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              {t}
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* REFUSAL */}
+      {/* CTA */}
       <section className="visa-cta">
-        <h2>Irish Visa Refused?</h2>
-        <p>
-          Don’t worry. We assist with refusal analysis and appeal preparation
-          for Irish visas.
-        </p>
-        <button className="primary-btn">Talk to a Visa Expert</button>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          Irish Visa Refused?
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          We assist with refusal analysis and appeal preparation.
+        </motion.p>
+
+        <motion.button
+          className="primary-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          Talk to a Visa Expert
+        </motion.button>
       </section>
 
     </main>
