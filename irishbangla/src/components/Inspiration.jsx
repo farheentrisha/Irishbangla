@@ -1,11 +1,11 @@
 import { useState } from "react";
 import "../styles/Inspiration.css";
 
-import niImg from "../assets/hero/belfest.jpg";
-import dublinImg from "../assets/hero/cliffs.jpg";
-import wildImg from "../assets/hero/other.jpg";
-import ancientImg from "../assets/hero/belfest.jpg";
-import heartImg from "../assets/hero/other.jpg";
+import niImg from "../assets/hero/northern.jpg";
+import dublinImg from "../assets/hero/dublin.jpg";
+import wildImg from "../assets/hero/wild2.jpg";
+import ancientImg from "../assets/hero/ancient.jpg";
+import heartImg from "../assets/hero/hidden.jpg";
 
 const places = {
   "Northern Ireland": {
