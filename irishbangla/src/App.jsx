@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useRef } from "react";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -14,43 +15,40 @@ import IrelandTravelProcess from "./components/IrelandTravelProcess";
 import Footer from "./components/Footer";
 import SustainableIreland from "./pages/SustainableIreland";
 
-
+// ✅ Home component
 function Home() {
+  const contactRef = useRef(null);
+
+  const scrollToContact = () => {
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       <Hero />
       <VisaSearchCard />
       <ThinkingTrip />
-      <Services />
+      <Services onEnquiryClick={scrollToContact} />
       <Inspiration />
       <AboutUs />
-      <ContactSection />
+      <ContactSection ref={contactRef} /> {/* ✅ attach ref */}
       <Footer />
     </>
   );
 }
 
+// ✅ App component
 function App() {
   return (
     <Router>
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} /> {/* only one / route */}
         <Route path="/visa-details" element={<VisaDetails />} />
-
-        {/* ✅ ADD THIS */}
         <Route path="/track/:trackingId" element={<TrackerPage />} />
-        <Route path="/" element={<ThinkingTrip />} />
-        <Route
-          path="/ireland-travel-process"
-          element={<IrelandTravelProcess />}
-        />
-        <Route
-  path="/sustainable-ireland"
-  element={<SustainableIreland />}
-/>
-
+        <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
+        <Route path="/sustainable-ireland" element={<SustainableIreland />} />
       </Routes>
     </Router>
   );

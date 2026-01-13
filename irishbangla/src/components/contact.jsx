@@ -1,8 +1,8 @@
 import "../styles/contact.css";
 import { FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 
-export default function ContactSection() {
+const ContactSection = forwardRef((props, ref) => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -17,7 +17,7 @@ export default function ContactSection() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const whatsappNumber = "8801973180723"; // no + sign
+    const whatsappNumber = "8801973180723";
 
     const text = `
 📌 *New Consultation Booking*
@@ -38,9 +38,8 @@ ${formData.message}
   };
 
   return (
-    <section className="contact-wrapper">
+    <section className="contact-wrapper" ref={ref}>
       <div className="contact-container">
-
         {/* LEFT PANEL */}
         <div className="contact-left">
           <p className="contact-tag">Contact Us</p>
@@ -64,51 +63,29 @@ ${formData.message}
           </div>
         </div>
 
-        {/* RIGHT FORM CARD */}
+        {/* RIGHT FORM */}
         <div className="contact-card">
           <h3 className="form-title">Book a Free Consultation</h3>
 
           <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Full Name</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Full Name"
-                required
-                onChange={handleChange}
-              />
+              <input type="text" name="name" required onChange={handleChange} />
             </div>
 
             <div className="form-group">
               <label>Phone Number</label>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="+880 1XXXXXXXXX"
-                required
-                onChange={handleChange}
-              />
+              <input type="tel" name="phone" required onChange={handleChange} />
             </div>
 
             <div className="form-group">
               <label>Appointment Date</label>
-              <input
-                type="date"
-                name="date"
-                required
-                onChange={handleChange}
-              />
+              <input type="date" name="date" required onChange={handleChange} />
             </div>
 
             <div className="form-group">
               <label>Your Message</label>
-              <textarea
-                rows="4"
-                name="message"
-                placeholder="Write your questions or requirements"
-                onChange={handleChange}
-              />
+              <textarea rows="4" name="message" onChange={handleChange} />
             </div>
 
             <button type="submit" className="send-btn">
@@ -116,8 +93,9 @@ ${formData.message}
             </button>
           </form>
         </div>
-
       </div>
     </section>
   );
-}
+});
+
+export default ContactSection;

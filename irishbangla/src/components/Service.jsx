@@ -8,7 +8,7 @@ import {
   FaSuitcaseRolling,
 } from "react-icons/fa";
 
-const Services = () => {
+const Services = ({ onEnquiryClick }) => { // ✅ accept prop
   const cards = [
     {
       icon: <FaPlane />,
@@ -43,15 +43,14 @@ const Services = () => {
   ];
 
   return (
-    <section className="services-section" id="services">
-
+    <section className="services-section">
       <div className="services-left">
         <h2>Our Services</h2>
-        <p>
-          Irish Bangla delivers reliable travel, tour, and visa solutions with a
-          focus on comfort, trust, and seamless experiences worldwide.
-        </p>
-        <button>Send Your Enquiry</button>
+        <p>Irish Bangla delivers reliable travel, tour, and visa solutions with a focus on comfort, trust, and seamless experiences worldwide.</p>
+
+        <button onClick={onEnquiryClick}> {/* ✅ call prop */}
+          Send Your Enquiry
+        </button>
       </div>
 
       <div className="services-grid">
