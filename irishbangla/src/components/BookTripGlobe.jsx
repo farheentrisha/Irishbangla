@@ -174,6 +174,7 @@ export default function BookTripGlobe({ countries, selectedCode }) {
     };
     img.onerror = () => {
       if (!active) return;
+      setMapReady(true);
     };
     img.src = EARTH_MAP;
     return () => {
