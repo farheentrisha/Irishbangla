@@ -274,7 +274,7 @@ export default function ServiceTopic() {
                 const [title, ...rest] = item.split(" — ");
                 return (
                   <Motion.article
-                    key={item}
+                    key={i}
                     className="svc-benefit-card"
                     custom={i}
                     initial="hidden"
