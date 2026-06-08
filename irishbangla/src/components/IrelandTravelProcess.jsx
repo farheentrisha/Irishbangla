@@ -3,9 +3,9 @@ import { motion as Motion } from "framer-motion";
 import { useMemo } from "react";
 import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
-import galleryA from "../assets/irelandpic/mark-de-jong-NELRuCfHxxU-unsplash.jpg";
-import galleryB from "../assets/irelandpic/zihao-chen-m5PzbFyN2-U-unsplash.jpg";
-import galleryC from "../assets/irelandpic/wynand-van-poortvliet-dQXXN0cvZnI-unsplash.jpg";
+import galleryA from "../assets/hero/ancient.jpg";
+import galleryB from "../assets/hero/hidden.jpg";
+import galleryC from "../assets/hero/mood2.jpg";
 
 const toc = [
   { id: "intro", title: "Introduction" },

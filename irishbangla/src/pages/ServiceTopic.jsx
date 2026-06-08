@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
+import { motion as Motion } from "framer-motion";
+import { FaArrowRight, FaCheck, FaClock, FaGlobeEurope, FaShieldAlt } from "react-icons/fa";
 import { getServiceTopic, serviceTopics } from "../data/serviceTopics";
+import { usePreloadedImage } from "../hooks/usePreloadedImage";
 import "../styles/ServicePages.css";
 
 import imgCliffs from "../assets/hero/cliffs.jpg";
@@ -14,21 +17,36 @@ import imgNorthern from "../assets/hero/northern.jpg";
 import imgSummer from "../assets/hero/summer.jpg";
 import imgMood1 from "../assets/hero/mood1.jpg";
 import imgMood2 from "../assets/hero/mood2.jpg";
+import imgMood3 from "../assets/hero/mood3.jpg";
+import imgRainy from "../assets/hero/rainy.jpg";
 import imgBelfast from "../assets/hero/belfest.jpg";
-import imgScene from "../assets/irelandpic/scene.jpg";
-import imgScene2 from "../assets/irelandpic/scene2.jpg";
-import imgScene3 from "../assets/irelandpic/scene3.jpg";
-import imgTour from "../assets/irelandpic/tour.jpg";
-import imgMark from "../assets/irelandpic/mark-de-jong-NELRuCfHxxU-unsplash.jpg";
-import imgZihao from "../assets/irelandpic/zihao-chen-m5PzbFyN2-U-unsplash.jpg";
 
 const SERVICE_GALLERY = {
-  "visa-consultancy": [imgCliffs, imgWild, imgScene, imgTour, imgMood1],
-  "cross-border-visa-processing": [imgWild2, imgNorthern, imgScene2, imgMark, imgBelfast],
-  "visa-application-support": [imgDublin, imgScene3, imgMood2, imgOther, imgSummer],
-  "e-visa-processing": [imgHidden, imgZihao, imgTour, imgScene, imgWild],
-  "express-consultation": [imgAncient, imgCliffs, imgWild2, imgScene2, imgMood1],
-  "document-legalization": [imgAncient, imgNorthern, imgTour, imgScene3, imgDublin],
+  "visa-consultancy": [imgCliffs, imgWild, imgNorthern, imgSummer],
+  "cross-border-visa-processing": [imgWild2, imgNorthern, imgHidden, imgBelfast],
+  "visa-application-support": [imgDublin, imgRainy, imgMood2, imgOther],
+  "e-visa-processing": [imgHidden, imgSummer, imgMood1, imgWild],
+  "express-consultation": [imgAncient, imgCliffs, imgWild2, imgMood1],
+  "document-legalization": [imgAncient, imgNorthern, imgMood3, imgSummer],
+};
+
+/** Six distinct hues — no repeated greens/oranges between services */
+const SERVICE_THEME = {
+  "visa-consultancy": { accent: "#10b981", hue: "#0a5c4d", label: "Consultancy" },
+  "cross-border-visa-processing": { accent: "#3b82f6", hue: "#1e3a8a", label: "Cross-border" },
+  "visa-application-support": { accent: "#0891b2", hue: "#164e63", label: "Full support" },
+  "e-visa-processing": { accent: "#8b5cf6", hue: "#5b21b6", label: "Digital" },
+  "express-consultation": { accent: "#eab308", hue: "#713f12", label: "Express", lightBtn: true },
+  "document-legalization": { accent: "#e11d48", hue: "#881337", label: "Legalisation" },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
 function ServiceTable({ table }) {
@@ -59,6 +77,21 @@ function ServiceTable({ table }) {
   );
 }
 
+function ProcessTimeline({ steps }) {
+  return (
+    <ol className="svc-process">
+      {steps.map((step, i) => (
+        <li key={i}>
+          <span className="svc-process-marker" aria-hidden="true">
+            {i + 1}
+          </span>
+          <p>{step}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function SectionContent({ section }) {
   return (
     <>
@@ -69,20 +102,17 @@ function SectionContent({ section }) {
       ))}
 
       {section.bullets && (
-        <ul className="svc-list">
+        <ul className="svc-checklist">
           {section.bullets.map((b, idx) => (
-            <li key={idx}>{b}</li>
+            <li key={idx}>
+              <FaCheck aria-hidden />
+              <span>{b}</span>
+            </li>
           ))}
         </ul>
       )}
 
-      {section.numbered && (
-        <ol className="svc-list svc-list--numbered">
-          {section.numbered.map((item, idx) => (
-            <li key={idx}>{item}</li>
-          ))}
-        </ol>
-      )}
+      {section.numbered && <ProcessTimeline steps={section.numbered} />}
 
       {section.table && <ServiceTable table={section.table} />}
 
@@ -98,18 +128,34 @@ function SectionContent({ section }) {
   );
 }
 
-function ServicePills({ activeSlug }) {
+function ServiceRail({ activeSlug }) {
   return (
-    <nav className="svc-pills" aria-label="All services">
-      {serviceTopics.map((t) => (
-        <Link
-          key={t.slug}
-          to={`/services/${t.slug}`}
-          className={`svc-pill${t.slug === activeSlug ? " active" : ""}`}
-        >
-          {t.title}
-        </Link>
-      ))}
+    <nav className="svc-rail" aria-label="Browse services">
+      <div className="svc-rail-track">
+        {serviceTopics.map((t) => {
+          const Icon = t.icon;
+          const active = t.slug === activeSlug;
+          const theme = SERVICE_THEME[t.slug] ?? SERVICE_THEME["visa-consultancy"];
+          return (
+            <Link
+              key={t.slug}
+              to={`/services/${t.slug}`}
+              className={`svc-rail-card${active ? " is-active" : ""}`}
+              style={
+                active
+                  ? { "--card-accent": theme.accent, "--card-hue": theme.hue }
+                  : undefined
+              }
+            >
+              <span className="svc-rail-icon" aria-hidden="true">
+                <Icon />
+              </span>
+              <span className="svc-rail-title">{t.title}</span>
+              <span className="svc-rail-desc">{t.menuDescription}</span>
+            </Link>
+          );
+        })}
+      </div>
     </nav>
   );
 }
@@ -118,192 +164,143 @@ export default function ServiceTopic() {
   const { service } = useParams();
 
   const current = useMemo(() => getServiceTopic(service), [service]);
-  const currentIndex = useMemo(
-    () => serviceTopics.findIndex((t) => t.slug === service),
-    [service]
-  );
-
+  const heroReady = usePreloadedImage(current?.heroImage);
+  const theme = SERVICE_THEME[service] ?? SERVICE_THEME["visa-consultancy"];
   const gallery = SERVICE_GALLERY[service] ?? SERVICE_GALLERY["visa-consultancy"];
 
   if (!current) {
     return (
-      <div className="svc-page">
-        <div className="svc-wrap svc-fallback">
-          <p className="svc-kicker">Services</p>
+      <main className="svc-page">
+        <div className="svc-page-bg" aria-hidden="true" />
+        <div className="svc-wrap svc-notfound">
+          <p className="svc-eyebrow">Services</p>
           <h1>Service not found</h1>
-          <p className="svc-lead">Choose a service from the list below.</p>
-          <ServicePills activeSlug={service} />
-          <Link to="/#services" className="svc-text-link">
-            ← Back to home
-          </Link>
+          <p className="svc-lead">Pick a service below to continue.</p>
+          <ServiceRail activeSlug={service} />
         </div>
-      </div>
+      </main>
     );
   }
 
   const Icon = current.icon;
-  const prev = currentIndex > 0 ? serviceTopics[currentIndex - 1] : null;
-  const next =
-    currentIndex >= 0 && currentIndex < serviceTopics.length - 1
-      ? serviceTopics[currentIndex + 1]
-      : null;
-
-  const [g0, g1, g2, g3, g4] = gallery;
   const overview = current.sections[0];
-  const second = current.sections[1];
-  const featureBullets = overview?.bullets?.slice(0, 4) ?? [];
-  const tocTiles = current.toc?.slice(0, 2) ?? [];
+  const benefits = overview?.bullets?.slice(0, 4) ?? [];
+  const related = serviceTopics.filter((t) => t.slug !== current.slug).slice(0, 3);
 
   return (
-    <div className="svc-page">
-      {/* ── Hero ── */}
+    <main
+      className={`svc-page${theme.lightBtn ? " svc-page--light-accent" : ""}`}
+      style={{ "--svc-accent": theme.accent, "--svc-hue": theme.hue }}
+    >
+      <div className="svc-page-bg" aria-hidden="true" />
+
+      <div className="svc-top">
+      {/* ── Split cinematic hero ── */}
       <header className="svc-hero">
-        <img className="svc-hero-bg" src={current.heroImage} alt="" />
-        <div className="svc-hero-shade" aria-hidden="true" />
-        <div className="svc-wrap svc-hero-inner">
-          <div className="svc-hero-copy">
-            <span className="svc-kicker">Services · Emerald Visa &amp; Tours</span>
+        <div className="svc-hero-visual">
+          {!heroReady && <div className="svc-hero-img-placeholder" aria-hidden="true" />}
+          <img
+            src={current.heroImage}
+            alt=""
+            className={`svc-hero-img${heroReady ? " is-ready" : ""}`}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+          />
+          <div className="svc-hero-visual-scrim" aria-hidden="true" />
+          <span className="svc-hero-badge">{theme.label}</span>
+        </div>
+
+        <div className="svc-hero-panel">
+          <div className="svc-hero-panel-inner">
+            <p className="svc-eyebrow">Emerald Visa &amp; Tours</p>
+            <div className="svc-hero-icon-row">
+              <span className="svc-hero-icon" aria-hidden="true">
+                <Icon />
+              </span>
+              <span className="svc-hero-tag">{current.menuDescription}</span>
+            </div>
             <h1>{current.title}</h1>
             <p className="svc-hero-lead">{current.lead}</p>
+
+            <div className="svc-hero-stats">
+              <div className="svc-stat">
+                <FaShieldAlt aria-hidden />
+                <span>
+                  <strong>Expert-led</strong>
+                  Embassy-aligned strategy
+                </span>
+              </div>
+              <div className="svc-stat">
+                <FaGlobeEurope aria-hidden />
+                <span>
+                  <strong>Global</strong>
+                  Clients worldwide
+                </span>
+              </div>
+              <div className="svc-stat">
+                <FaClock aria-hidden />
+                <span>
+                  <strong>{current.sections.length} guides</strong>
+                  On this page
+                </span>
+              </div>
+            </div>
+
             <div className="svc-hero-actions">
-              <Link to="/book-trip" className="svc-btn svc-btn--white">
+              <Link to="/book-trip" className="svc-btn svc-btn--primary">
                 Book consultation
+                <FaArrowRight aria-hidden />
               </Link>
-              <Link to="/#services" className="svc-text-link svc-text-link--light">
-                ← All services
-              </Link>
+              <a href="#svc-sections" className="svc-btn svc-btn--outline">
+                Explore details
+              </a>
             </div>
           </div>
-
-          <aside className="svc-float-card svc-float-card--sky">
-            <span className="svc-float-icon" aria-hidden="true">
-              <Icon />
-            </span>
-            <h2>{overview?.heading ?? "Service overview"}</h2>
-            <p>{current.menuDescription}</p>
-            <a href={`#${overview?.id ?? "overview"}`} className="svc-text-link">
-              Learn more →
-            </a>
-          </aside>
         </div>
       </header>
 
-      <ServicePills activeSlug={current.slug} />
-
-      {/* ── Mosaic intro ── */}
-      <section className="svc-section svc-mosaic" aria-labelledby="svc-mosaic-title">
-        <div className="svc-wrap">
-          <div className="svc-split-head">
-            <h2 id="svc-mosaic-title" className="svc-h2">
-              Step into your gateway
-            </h2>
-            <p className="svc-split-lead">{current.lead}</p>
-          </div>
-
-          <div className="svc-mosaic-grid">
-            <figure className="svc-img-frame">
-              <img src={g0} alt="" loading="lazy" />
-            </figure>
-            <figure className="svc-img-frame">
-              <img src={g1} alt="" loading="lazy" />
-            </figure>
-            <figure className="svc-img-frame">
-              <img src={g2} alt="" loading="lazy" />
-            </figure>
-
-            {tocTiles[0] && (
-              <div className="svc-accent svc-accent--rose">
-                <span className="svc-accent-dot" aria-hidden="true" />
-                <h3>{tocTiles[0].label}</h3>
-                <p>{overview?.paragraphs?.[0]?.slice(0, 120)}…</p>
-                <a href={`#${tocTiles[0].id}`} className="svc-text-link">
-                  View section →
-                </a>
-              </div>
-            )}
-
-            {tocTiles[1] && (
-              <div className="svc-accent svc-accent--mint">
-                <span className="svc-accent-dot svc-accent-dot--green" aria-hidden="true" />
-                <h3>{tocTiles[1].label}</h3>
-                <p>{second?.paragraphs?.[0]?.slice(0, 100) ?? second?.heading ?? "Full details inside."}…</p>
-                <a href={`#${tocTiles[1].id}`} className="svc-text-link">
-                  View section →
-                </a>
-              </div>
-            )}
-
-            <figure className="svc-img-frame">
-              <img src={g3} alt="" loading="lazy" />
-            </figure>
-          </div>
+        <div className="svc-rail-wrap">
+          <ServiceRail activeSlug={current.slug} />
         </div>
-      </section>
+      </div>
 
-      {/* ── Three-column features ── */}
-      <section className="svc-section svc-features-row" aria-labelledby="svc-features-title">
-        <div className="svc-wrap svc-features-grid">
-          <div className="svc-features-copy">
-            <h2 id="svc-features-title" className="svc-h2">
-              {overview?.heading}
-            </h2>
-            <ul className="svc-feature-list">
-              {featureBullets.map((item, i) => {
+      {/* ── Benefit cards ── */}
+      {benefits.length > 0 && (
+        <section className="svc-benefits" aria-label="Key benefits">
+          <div className="svc-wrap">
+            <div className="svc-benefits-grid">
+              {benefits.map((item, i) => {
                 const [title, ...rest] = item.split(" — ");
                 return (
-                  <li key={i}>
-                    <span className="svc-feature-num">{String(i + 1).padStart(2, "0")}</span>
-                    <div>
-                      <strong>{title}</strong>
-                      {rest.length > 0 && <span>{rest.join(" — ")}</span>}
-                    </div>
-                  </li>
+                  <Motion.article
+                    key={i}
+                    className="svc-benefit-card"
+                    custom={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.3 }}
+                    variants={fadeUp}
+                  >
+                    <span className="svc-benefit-num">{String(i + 1).padStart(2, "0")}</span>
+                    <h3>{title}</h3>
+                    {rest.length > 0 && <p>{rest.join(" — ")}</p>}
+                  </Motion.article>
                 );
               })}
-            </ul>
-            <Link to="/book-trip" className="svc-btn svc-btn--green">
-              Get started
-            </Link>
-          </div>
-
-          <figure className="svc-img-frame svc-img-frame--portrait">
-            <img src={g3} alt="" loading="lazy" />
-            <figcaption className="svc-portrait-caption">
-              <blockquote>&ldquo;Expert guidance at every step of your visa journey.&rdquo;</blockquote>
-            </figcaption>
-          </figure>
-
-          <div className="svc-side-stack">
-            <div className="svc-side-intro">
-              <h3 className="svc-h3">{second?.heading ?? "What to expect"}</h3>
-              <p>{second?.paragraphs?.[0] ?? current.menuDescription}</p>
             </div>
-            <figure className="svc-thumb-card">
-              <div className="svc-img-frame svc-img-frame--thumb">
-                <img src={g4} alt="" loading="lazy" />
-              </div>
-              <span className="svc-tag">Guide</span>
-              <figcaption>{current.toc?.[2]?.label ?? "Full process"}</figcaption>
-            </figure>
-            <figure className="svc-thumb-card">
-              <div className="svc-img-frame svc-img-frame--thumb">
-                <img src={g0} alt="" loading="lazy" />
-              </div>
-              <span className="svc-tag svc-tag--new">New</span>
-              <figcaption>{current.toc?.[3]?.label ?? "Documents"}</figcaption>
-            </figure>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* ── Jump links ── */}
+      {/* ── Sticky section nav ── */}
       {current.toc?.length > 0 && (
-        <div className="svc-jump">
-          <div className="svc-wrap svc-jump-inner">
-            <span className="svc-jump-label">On this page</span>
-            <nav className="svc-jump-links" aria-label="Page sections">
+        <div className="svc-sticky-nav">
+          <div className="svc-sticky-nav-inner">
+            <span className="svc-sticky-label">Jump to</span>
+            <nav aria-label="Page sections">
               {current.toc.map((item) => (
-                <a href={`#${item.id}`} key={item.id}>
+                <a key={item.id} href={`#${item.id}`}>
                   {item.label}
                 </a>
               ))}
@@ -312,97 +309,110 @@ export default function ServiceTopic() {
         </div>
       )}
 
-      {/* ── Detail sections ── */}
-      <div className="svc-detail">
-        <div className="svc-wrap svc-detail-grid">
-          {current.sections.map((sec, idx) => (
-            <article
-              className={`svc-block${idx % 2 === 1 ? " svc-block--alt" : ""}`}
-              id={sec.id}
-              key={sec.id}
-            >
-              <div className="svc-block-head">
-                <span className="svc-block-num">{String(idx + 1).padStart(2, "0")}</span>
-                <h2 className="svc-h2 svc-block-title">{sec.heading}</h2>
-              </div>
-              <div className="svc-block-body">
-                <SectionContent section={sec} />
-              </div>
-              {idx < gallery.length && (
-                <figure className="svc-img-frame svc-block-photo">
-                  <img src={gallery[idx % gallery.length]} alt="" loading="lazy" />
+      {/* ── Magazine sections ── */}
+      <div className="svc-sections" id="svc-sections">
+        <div className="svc-wrap svc-sections-inner">
+          {current.sections.map((sec, idx) => {
+            const flip = idx % 2 === 1;
+            const image = gallery[idx % gallery.length];
+
+            return (
+              <Motion.article
+                key={sec.id}
+                id={sec.id}
+                className={`svc-section-block${flip ? " svc-section-block--flip" : ""}`}
+                custom={idx}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.12 }}
+                variants={fadeUp}
+              >
+                <div className="svc-section-copy">
+                  <span className="svc-section-index">{String(idx + 1).padStart(2, "0")}</span>
+                  <h2>{sec.heading}</h2>
+                  <SectionContent section={sec} />
+                </div>
+
+                <figure className="svc-section-media">
+                  <img src={image} alt="" loading="lazy" decoding="async" />
+                  <figcaption className="svc-section-media-cap">
+                    {current.toc?.[idx]?.label ?? sec.heading}
+                  </figcaption>
                 </figure>
-              )}
-            </article>
-          ))}
+              </Motion.article>
+            );
+          })}
         </div>
       </div>
 
-      {/* ── Bottom band ── */}
-      <section className="svc-section svc-bottom" aria-label="More services">
+      {/* ── Related services ── */}
+      <section className="svc-related" aria-labelledby="svc-related-title">
         <div className="svc-wrap">
-          <div className="svc-bottom-hero">
-            <figure className="svc-img-frame svc-bottom-photo">
-              <img src={g1} alt="" loading="lazy" />
-            </figure>
-            <div className="svc-bottom-copy">
-              <h2 className="svc-h2">Ready to start?</h2>
-              <p>
-                Book a consultation — we&apos;ll match you with the right service for your destination
-                and timeline.
-              </p>
-              <Link to="/book-trip" className="svc-btn svc-btn--green">
-                Book consultation
-              </Link>
-            </div>
+          <div className="svc-related-head">
+            <p className="svc-eyebrow svc-eyebrow--dark">More services</p>
+            <h2 id="svc-related-title">You might also need</h2>
           </div>
-
-          <div className="svc-bottom-cards">
-            {prev && (
-              <Link to={`/services/${prev.slug}`} className="svc-mini-card">
-                <div className="svc-img-frame svc-img-frame--card">
-                  <img src={prev.heroImage} alt="" loading="lazy" />
-                </div>
-                <div>
-                  <span className="svc-mini-kicker">Previous</span>
-                  <strong>{prev.title}</strong>
-                </div>
-              </Link>
-            )}
-            {next && (
-              <Link to={`/services/${next.slug}`} className="svc-mini-card">
-                <div className="svc-img-frame svc-img-frame--card">
-                  <img src={next.heroImage} alt="" loading="lazy" />
-                </div>
-                <div>
-                  <span className="svc-mini-kicker">Next</span>
-                  <strong>{next.title}</strong>
-                </div>
-              </Link>
-            )}
-            <Link to="/#services" className="svc-mini-card svc-mini-card--text">
-              <div className="svc-img-frame svc-img-frame--card">
-                <img src={g2} alt="" loading="lazy" />
-              </div>
-              <div>
-                <span className="svc-mini-kicker">Explore</span>
-                <strong>All services</strong>
-              </div>
-            </Link>
+          <div className="svc-related-grid">
+            {related.map((t) => {
+              const RelIcon = t.icon;
+              const relTheme = SERVICE_THEME[t.slug] ?? SERVICE_THEME["visa-consultancy"];
+              return (
+                <Link
+                  key={t.slug}
+                  to={`/services/${t.slug}`}
+                  className="svc-related-card"
+                  style={{ "--card-accent": relTheme.accent, "--card-hue": relTheme.hue }}
+                >
+                  <div className="svc-related-img">
+                    <img src={t.heroImage} alt="" loading="lazy" />
+                    <span className="svc-related-icon" aria-hidden="true">
+                      <RelIcon />
+                    </span>
+                  </div>
+                  <div className="svc-related-body">
+                    <h3>{t.title}</h3>
+                    <p>{t.menuDescription}</p>
+                    <span className="svc-related-link">
+                      View service <FaArrowRight aria-hidden />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="svc-disclaimer svc-wrap" role="note" aria-label="Disclaimer">
-        <span aria-hidden="true">⚠</span>
-        <div>
-          <strong>Disclaimer</strong>
-          <p>
-            Visa requirements, fees, and processing times change without notice. Always confirm
-            current rules with official embassy sources before applying.
-          </p>
+      {/* ── CTA band ── */}
+      <section className="svc-cta-band">
+        <div className="svc-cta-band-bg" aria-hidden="true" />
+        <div className="svc-wrap svc-cta-band-inner">
+          <div>
+            <p className="svc-cta-kicker">Start your application</p>
+            <h2>Ready for {current.title.toLowerCase()}?</h2>
+            <p>Tell us your destination and timeline — we&apos;ll respond with a clear plan.</p>
+          </div>
+          <Link to="/book-trip" className="svc-btn svc-btn--light">
+            Book consultation
+            <FaArrowRight aria-hidden />
+          </Link>
         </div>
       </section>
-    </div>
+
+      <div className="svc-wrap">
+        <section className="svc-disclaimer" role="note" aria-label="Disclaimer">
+          <span className="svc-disclaimer-icon" aria-hidden="true">
+            ⚠
+          </span>
+          <div>
+            <strong>Disclaimer</strong>
+            <p>
+              Visa requirements, fees, and processing times change without notice. Always confirm
+              current rules with official embassy sources before applying.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

@@ -7,9 +7,12 @@
 /* ─── Hero ───────────────────────────────────────────────────────────── */
 .info-hero {
   padding: 130px 16px 64px;
+  background-color: #0a5c4d;
+  background-image: linear-gradient(120deg, rgba(10, 92, 77, 0.93), rgba(10, 92, 77, 0.58));
   background-size: cover;
   background-position: center;
   color: #fff;
+  transition: background-image 0.35s ease;
 }
 
 .info-hero--fallback {
@@ -146,6 +149,7 @@
   grid-template-columns: 310px 1fr;
   gap: 24px;
   align-items: start;   /* ← critical: prevents sidebar from stretching */
+  min-width: 0;
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────────────── */
@@ -288,6 +292,7 @@
 .info-content {
   display: grid;
   gap: 16px;
+  min-width: 0;
 }
 
 /* ─── Cards ──────────────────────────────────────────────────────────── */
@@ -298,6 +303,8 @@
   padding: 20px 22px;
   box-shadow: 0 2px 16px rgba(2, 6, 23, 0.05);
   transition: box-shadow 0.2s ease;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .info-card:hover {
@@ -330,15 +337,23 @@
 /* ─── Table ──────────────────────────────────────────────────────────── */
 .info-table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid rgba(2, 6, 23, 0.08);
   border-radius: 12px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
 .info-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 620px;
+}
+
+@media (min-width: 768px) {
+  .info-table {
+    min-width: 620px;
+  }
 }
 
 .info-table th,
@@ -347,6 +362,8 @@
   padding: 11px 14px;
   border-bottom: 1px solid rgba(2, 6, 23, 0.07);
   font-size: 13.5px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .info-table th {
