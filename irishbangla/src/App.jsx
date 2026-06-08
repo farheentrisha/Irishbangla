@@ -5,7 +5,17 @@ import Hero from "./components/Hero";
 import VisaSearchCard from "./components/VisaSearchCard";
 import { ScrollReveal } from "./components/ScrollReveal";
 import Layout from "./components/Layout";
+import PageLoader from "./components/PageLoader";
 import BookTrip from "./pages/BookTrip";
+import VisaDetails from "./pages/VisaDetails";
+import InformationTopic from "./pages/InformationTopic";
+import ServiceTopic from "./pages/ServiceTopic";
+import TrackerPage from "./pages/TrackerPage";
+import IrelandTravelProcess from "./components/IrelandTravelProcess";
+import SustainableIreland from "./pages/SustainableIreland";
+import IrelandWeather from "./pages/irelandweather";
+import IrelandTourismGuide from "./pages/IrelandTourismGuide";
+import NotFound from "./pages/NotFound";
 import { ADMIN_CONSOLE_PATH } from "./constants/adminRoute";
 
 const ThinkingTrip = lazy(() => import("./components/thinkingtrip"));
@@ -16,25 +26,8 @@ const ContactSection = lazy(() => import("./components/contact"));
 const AboutUs = lazy(() => import("./components/aboutus"));
 const TourismIrelandHomeSection = lazy(() => import("./components/TourismIrelandHomeSection"));
 
-const VisaDetails = lazy(() => import("./pages/VisaDetails"));
-const TrackerPage = lazy(() => import("./pages/TrackerPage"));
-const IrelandTravelProcess = lazy(() => import("./components/IrelandTravelProcess"));
-const SustainableIreland = lazy(() => import("./pages/SustainableIreland"));
-const IrelandWeather = lazy(() => import("./pages/irelandweather"));
-const InformationTopic = lazy(() => import("./pages/InformationTopic"));
-const IrelandTourismGuide = lazy(() => import("./pages/IrelandTourismGuide"));
-const ServiceTopic = lazy(() => import("./pages/ServiceTopic"));
-const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminRouteShell = lazy(() => import("./components/AdminRouteShell"));
 const AdminTrackerConsole = lazy(() => import("./pages/AdminTrackerConsole"));
-
-function PageLoader() {
-  return (
-    <div className="center page-with-navbar" aria-live="polite">
-      Loading...
-    </div>
-  );
-}
 
 function PageSuspense({ children }) {
   return <Suspense fallback={<PageLoader />}>{children}</Suspense>;
@@ -105,7 +98,6 @@ function Home() {
   );
 }
 
-// ✅ App component
 function App() {
   return (
     <Router>
@@ -114,23 +106,23 @@ function App() {
           <Route index element={<AdminTrackerConsole />} />
         </Route>
         <Route element={<Layout />}>
-          <Route path="/" element={<Home />} /> {/* only one / route */}
+          <Route path="/" element={<Home />} />
           <Route path="/book-trip" element={<BookTrip />} />
-          <Route path="/visa-details" element={<PageSuspense><VisaDetails /></PageSuspense>} />
+          <Route path="/visa-details" element={<VisaDetails />} />
           <Route path="/information" element={<Navigate to="/information/moving-to-ireland" replace />} />
-          <Route path="/information/:topic" element={<PageSuspense><InformationTopic /></PageSuspense>} />
-          <Route path="/track/:trackingId" element={<PageSuspense><TrackerPage /></PageSuspense>} />
-          <Route path="/ireland-travel-process" element={<PageSuspense><IrelandTravelProcess /></PageSuspense>} />
-          <Route path="/ireland-weather" element={<PageSuspense><IrelandWeather /></PageSuspense>} />
-          <Route path="/sustainable-ireland" element={<PageSuspense><SustainableIreland /></PageSuspense>} />
-          <Route path="/tourism-ireland/guide" element={<PageSuspense><IrelandTourismGuide /></PageSuspense>} />
+          <Route path="/information/:topic" element={<InformationTopic />} />
+          <Route path="/track/:trackingId" element={<TrackerPage />} />
+          <Route path="/ireland-travel-process" element={<IrelandTravelProcess />} />
+          <Route path="/ireland-weather" element={<IrelandWeather />} />
+          <Route path="/sustainable-ireland" element={<SustainableIreland />} />
+          <Route path="/tourism-ireland/guide" element={<IrelandTourismGuide />} />
           <Route path="/services" element={<Navigate to="/services/visa-consultancy" replace />} />
           <Route
             path="/services/visa-processing-bangladesh"
             element={<Navigate to="/services/visa-application-support" replace />}
           />
-          <Route path="/services/:service" element={<PageSuspense><ServiceTopic /></PageSuspense>} />
-          <Route path="*" element={<PageSuspense><NotFound /></PageSuspense>} />
+          <Route path="/services/:service" element={<ServiceTopic />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </Router>

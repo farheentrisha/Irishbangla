@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { motion as Motion } from "framer-motion";
 import { FaArrowRight, FaCheck, FaClock, FaGlobeEurope, FaShieldAlt } from "react-icons/fa";
 import { getServiceTopic, serviceTopics } from "../data/serviceTopics";
+import { usePreloadedImage } from "../hooks/usePreloadedImage";
 import "../styles/ServicePages.css";
 
 import imgCliffs from "../assets/hero/cliffs.jpg";
@@ -163,6 +164,7 @@ export default function ServiceTopic() {
   const { service } = useParams();
 
   const current = useMemo(() => getServiceTopic(service), [service]);
+  const heroReady = usePreloadedImage(current?.heroImage);
   const theme = SERVICE_THEME[service] ?? SERVICE_THEME["visa-consultancy"];
   const gallery = SERVICE_GALLERY[service] ?? SERVICE_GALLERY["visa-consultancy"];
 
@@ -196,7 +198,15 @@ export default function ServiceTopic() {
       {/* ── Split cinematic hero ── */}
       <header className="svc-hero">
         <div className="svc-hero-visual">
-          <img src={current.heroImage} alt="" className="svc-hero-img" fetchPriority="high" decoding="async" />
+          {!heroReady && <div className="svc-hero-img-placeholder" aria-hidden="true" />}
+          <img
+            src={current.heroImage}
+            alt=""
+            className={`svc-hero-img${heroReady ? " is-ready" : ""}`}
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+          />
           <div className="svc-hero-visual-scrim" aria-hidden="true" />
           <span className="svc-hero-badge">{theme.label}</span>
         </div>

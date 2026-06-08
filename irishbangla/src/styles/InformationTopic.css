@@ -7,9 +7,12 @@
 /* ─── Hero ───────────────────────────────────────────────────────────── */
 .info-hero {
   padding: 130px 16px 64px;
+  background-color: #0a5c4d;
+  background-image: linear-gradient(120deg, rgba(10, 92, 77, 0.93), rgba(10, 92, 77, 0.58));
   background-size: cover;
   background-position: center;
   color: #fff;
+  transition: background-image 0.35s ease;
 }
 
 .info-hero--fallback {

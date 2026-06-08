@@ -34,8 +34,17 @@ export default function TrackerPage() {
 
   if (loading) {
     return (
-      <div className="center">
-        <h2 className="center">Loading...</h2>
+      <div className="page-with-navbar tracker-loading" aria-live="polite" aria-busy="true">
+        <div className="tracker-loading__shell">
+          <div className="tracker-loading__side" />
+          <div className="tracker-loading__main">
+            <div className="tracker-loading__line tracker-loading__line--lg" />
+            <div className="tracker-loading__line" />
+            <div className="tracker-loading__line tracker-loading__line--sm" />
+            <div className="tracker-loading__timeline" />
+          </div>
+        </div>
+        <p className="tracker-loading__label">Fetching tracking details…</p>
       </div>
     );
   }

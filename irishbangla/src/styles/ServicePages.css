@@ -73,14 +73,30 @@
   position: relative;
   overflow: hidden;
   min-height: 260px;
+  background: #1a2520;
+}
+
+.svc-hero-img-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a2520 0%, #2d3b35 50%, #1a2520 100%);
+  z-index: 0;
 }
 
 .svc-hero-img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.svc-hero-img.is-ready {
+  opacity: 1;
 }
 
 .svc-hero-visual-scrim {

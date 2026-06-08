@@ -1,6 +1,7 @@
 import { useMemo, useEffect, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getInformationTopic, informationTopics } from "../data/informationTopics";
+import { usePreloadedImage } from "../hooks/usePreloadedImage";
 import "../styles/InformationTopic.css";
 
 function Disclaimer() {
@@ -81,6 +82,7 @@ export default function InformationTopic() {
     () => informationTopics.findIndex((t) => t.slug === topic),
     [topic]
   );
+  const heroReady = usePreloadedImage(current?.heroImage);
 
   // Scroll mobile nav tab into view when topic changes
   useEffect(() => {
@@ -147,10 +149,14 @@ export default function InformationTopic() {
   return (
     <main className="info-page">
       <section
-        className="info-hero"
-        style={{
-          backgroundImage: `linear-gradient(120deg, rgba(10,92,77,0.93), rgba(10,92,77,0.58)), url(${current.heroImage})`,
-        }}
+        className={`info-hero${heroReady ? " info-hero--ready" : ""}`}
+        style={
+          heroReady
+            ? {
+                backgroundImage: `linear-gradient(120deg, rgba(10,92,77,0.93), rgba(10,92,77,0.58)), url(${current.heroImage})`,
+              }
+            : undefined
+        }
       >
         <div className="info-hero-inner">
           <p className="info-eyebrow">INFORMATION</p>
