@@ -59,6 +59,7 @@
   display: grid;
   grid-template-columns: 2.5fr 1fr;
   gap: 28px;
+  min-width: 0;
 }
 
 
@@ -69,6 +70,8 @@
   border-radius: 16px;
   padding: 28px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .visa-main h2 {
@@ -182,16 +185,24 @@
 
 .visa-table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 
 .visa-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 820px;
   background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .visa-table {
+    min-width: 820px;
+  }
 }
 
 .visa-table th,
@@ -201,6 +212,8 @@
   border-bottom: 1px solid #e5e7eb;
   font-size: 14px;
   color: #334155;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .visa-table th {

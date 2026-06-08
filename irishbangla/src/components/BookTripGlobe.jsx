@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { destinationFlagUrl } from "../data/bookTripDestinations";
 
-const EARTH_MAP =
-  "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg";
+const EARTH_MAP = "/globe-earth.jpg";
 
 const GLOBE_PX = 124;
 /**
@@ -173,6 +172,9 @@ export default function BookTripGlobe({ countries, selectedCode }) {
       textureRef.current = buildMatteTexture(img);
       setMapReady(true);
     };
+    img.onerror = () => {
+      if (!active) return;
+    };
     img.src = EARTH_MAP;
     return () => {
       active = false;
@@ -212,7 +214,7 @@ export default function BookTripGlobe({ countries, selectedCode }) {
                   alt=""
                   width={32}
                   height={32}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
               </li>
@@ -222,7 +224,11 @@ export default function BookTripGlobe({ countries, selectedCode }) {
 
         <div className="booktrip-globe__ball-wrap">
           <div className="booktrip-globe__ball">
-            <canvas ref={canvasRef} className="booktrip-globe__canvas" />
+            {!mapReady && <div className="booktrip-globe__placeholder" aria-hidden="true" />}
+            <canvas
+              ref={canvasRef}
+              className={`booktrip-globe__canvas${mapReady ? " is-ready" : ""}`}
+            />
             <div className="booktrip-globe__shade" />
             <div className="booktrip-globe__highlight" />
           </div>

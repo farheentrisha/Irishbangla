@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import VisaSearchCard from "./components/VisaSearchCard";
 import { ScrollReveal } from "./components/ScrollReveal";
 import Layout from "./components/Layout";
+import BookTrip from "./pages/BookTrip";
 import { ADMIN_CONSOLE_PATH } from "./constants/adminRoute";
 
 const ThinkingTrip = lazy(() => import("./components/thinkingtrip"));
@@ -20,7 +21,6 @@ const TrackerPage = lazy(() => import("./pages/TrackerPage"));
 const IrelandTravelProcess = lazy(() => import("./components/IrelandTravelProcess"));
 const SustainableIreland = lazy(() => import("./pages/SustainableIreland"));
 const IrelandWeather = lazy(() => import("./pages/irelandweather"));
-const BookTrip = lazy(() => import("./pages/BookTrip"));
 const InformationTopic = lazy(() => import("./pages/InformationTopic"));
 const IrelandTourismGuide = lazy(() => import("./pages/IrelandTourismGuide"));
 const ServiceTopic = lazy(() => import("./pages/ServiceTopic"));
@@ -115,7 +115,7 @@ function App() {
         </Route>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} /> {/* only one / route */}
-          <Route path="/book-trip" element={<PageSuspense><BookTrip /></PageSuspense>} />
+          <Route path="/book-trip" element={<BookTrip />} />
           <Route path="/visa-details" element={<PageSuspense><VisaDetails /></PageSuspense>} />
           <Route path="/information" element={<Navigate to="/information/moving-to-ireland" replace />} />
           <Route path="/information/:topic" element={<PageSuspense><InformationTopic /></PageSuspense>} />

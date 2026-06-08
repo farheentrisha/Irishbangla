@@ -1,8 +1,20 @@
+import { useEffect } from "react";
 import BookingForm from "../components/booktrip/BookingForm";
 import ContactCard from "../components/booktrip/ContactCard";
 import "../styles/BookTrip.css";
 
+const GLOBE_TEXTURE = "/globe-earth.jpg";
+
 export default function BookTrip() {
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = GLOBE_TEXTURE;
+    document.head.appendChild(link);
+    return () => link.remove();
+  }, []);
+
   return (
     <div className="booktrip-page">
       <div className="booktrip-page__bg" aria-hidden="true" />
