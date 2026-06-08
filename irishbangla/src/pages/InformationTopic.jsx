@@ -149,7 +149,7 @@ export default function InformationTopic() {
   return (
     <main className="info-page">
       <section
-        className={`info-hero${heroReady ? " info-hero--ready" : ""}`}
+        className="info-hero"
         style={
           heroReady
             ? {
