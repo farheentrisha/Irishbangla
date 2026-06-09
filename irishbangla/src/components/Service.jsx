@@ -74,7 +74,7 @@ const Services = ({ onEnquiryClick }) => {
         <p className="services-guide-kicker">Comprehensive services guide</p>
         <h2>Our Services</h2>
         <p className="services-guide-lead">
-          IrishBangla helps travellers from <strong>any country</strong> plan a smooth trip to <strong>Ireland</strong> — from tours and visa guidance to
+          Irish Center helps travellers from <strong>any country</strong> plan a smooth trip to <strong>Ireland</strong> — from tours and visa guidance to
           stays and full travel consultancy. Every step is handled with care, accuracy, and transparency.
         </p>
 

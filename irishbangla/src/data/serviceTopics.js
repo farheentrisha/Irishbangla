@@ -36,7 +36,7 @@ export const serviceTopics = [
         id: "overview",
         heading: "How our visa consultancy works",
         paragraphs: [
-          "IrishBangla consultancy is deliberately front-loaded: we review travel purpose, passport history, financial background, and ties to home country before you invest in fees or bookings. This reduces costly rejections and re-applications.",
+          "Irish Center consultancy is deliberately front-loaded: we review travel purpose, passport history, financial background, and ties to home country before you invest in fees or bookings. This reduces costly rejections and re-applications.",
           "Our consultants work in English and Bangla, with specialist knowledge of Ireland (routed via New Delhi), Schengen, UK, and popular destinations for Bangladeshi travellers.",
         ],
         bullets: [
@@ -98,7 +98,7 @@ export const serviceTopics = [
         heading: "Common rejection traps — read before you apply",
         callout: {
           title: "Important for Ireland applicants",
-          text: "There is no Irish Embassy in Bangladesh. Applications are routed through the Embassy of Ireland in New Delhi, India. IrishBangla handles this as your authorised representative — you do not need to travel to India yourself.",
+          text: "There is no Irish Embassy in Bangladesh. Applications are routed through the Embassy of Ireland in New Delhi, India. Irish Center handles this as your authorised representative — you do not need to travel to India yourself.",
         },
         bullets: [
           "Insufficient funds or inconsistent bank history — sudden large deposits raise red flags.",
@@ -146,7 +146,7 @@ export const serviceTopics = [
         heading: "Understanding embassy jurisdiction",
         paragraphs: [
           "Cross-border processing means your application is assessed by an embassy or visa application centre outside Bangladesh, even though you prepare and often biometrics-submit locally through a VFS or similar partner.",
-          "IrishBangla maps the correct jurisdiction, courier chain, and appointment flow so documents are not rejected for being sent to the wrong mission.",
+          "Irish Center maps the correct jurisdiction, courier chain, and appointment flow so documents are not rejected for being sent to the wrong mission.",
         ],
         table: {
           columns: ["Destination", "Submission route from Bangladesh", "Notes"],
@@ -169,7 +169,7 @@ export const serviceTopics = [
         numbered: [
           "Complete AVATS online application and print summary.",
           "Gather supporting documents per Irish Immigration Service checklist.",
-          "IrishBangla submits on your behalf to New Delhi — no personal travel to India required.",
+          "Irish Center submits on your behalf to New Delhi — no personal travel to India required.",
           "Application assessed; additional documents requested if needed.",
           "Passport returned with visa or refusal letter; we verify entry dates and conditions.",
         ],
@@ -355,7 +355,7 @@ export const serviceTopics = [
         heading: "What e-visa processing covers",
         paragraphs: [
           "An e-visa (electronic visa) is linked to your passport number and issued via a government portal. You print the approval or show it on your phone at check-in and immigration. It is not a visa-on-arrival stamp — each country has different rules.",
-          "IrishBangla handles portal registration, document upload, payment, and approval verification so you arrive with a valid authorisation.",
+          "Irish Center handles portal registration, document upload, payment, and approval verification so you arrive with a valid authorisation.",
         ],
       },
       {

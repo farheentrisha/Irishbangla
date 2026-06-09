@@ -2,7 +2,7 @@ export function ToursBody() {
   return (
     <div className="sd-prose">
       <p className="sd-lead">
-        IrishBangla designs fully customized domestic and international tour packages. Whether you are planning a romantic getaway, a family holiday, a group adventure, or a corporate retreat, our travel designers build an itinerary that matches your timeline, budget, and preferences—covering flights, hotels, transfers, guided experiences, and travel insurance in one seamless package.
+        Irish Center designs fully customized domestic and international tour packages. Whether you are planning a romantic getaway, a family holiday, a group adventure, or a corporate retreat, our travel designers build an itinerary that matches your timeline, budget, and preferences—covering flights, hotels, transfers, guided experiences, and travel insurance in one seamless package.
       </p>
 
       <h3 className="sd-h3">What&apos;s included in every package</h3>
@@ -86,7 +86,7 @@ export function ToursBody() {
       </div>
       <p className="sd-muted">All prices are indicative and vary by season, group size, and cabin class. Contact us for a personalised quote. Fully customised itineraries available on request.</p>
 
-      <h3 className="sd-h3">Why book a package with IrishBangla?</h3>
+      <h3 className="sd-h3">Why book a package with Irish Center?</h3>
       <ul className="sd-list">
         <li>No hidden charges — transparent, all-inclusive pricing from day one.</li>
         <li>24/7 in-trip support via WhatsApp and phone, including emergency assistance.</li>
@@ -102,7 +102,7 @@ export function VisaBody() {
   return (
     <div className="sd-prose">
       <p className="sd-lead">
-        IrishBangla&apos;s dedicated visa team provides end-to-end assistance for tourist, business, and visit visas—reducing rejection risk through meticulous documentation, accurate applications, and proactive follow-up with embassies and consulates.
+        Irish Center&apos;s dedicated visa team provides end-to-end assistance for tourist, business, and visit visas—reducing rejection risk through meticulous documentation, accurate applications, and proactive follow-up with embassies and consulates.
       </p>
 
       <h3 className="sd-h3">Visa categories we process</h3>
@@ -185,7 +185,7 @@ export function VisaBody() {
 
       <div className="sd-callout">
         <strong>Important for Ireland visa applicants</strong>
-        <p>There is no Irish Embassy in Bangladesh. Applications are routed through the Embassy of Ireland in New Delhi, India. IrishBangla handles this process on your behalf as an authorised representative, so you do not need to travel to India yourself.</p>
+        <p>There is no Irish Embassy in Bangladesh. Applications are routed through the Embassy of Ireland in New Delhi, India. Irish Center handles this process on your behalf as an authorised representative, so you do not need to travel to India yourself.</p>
       </div>
     </div>
   );
@@ -195,7 +195,7 @@ export function IrelandBody() {
   return (
     <div className="sd-prose">
       <p className="sd-lead">
-        IrishBangla specialises in Irish and European travel—immersive itineraries beyond standard checklists, connecting you with authentic culture, landscapes, and history across the Emerald Isle and Europe.
+        Irish Center specialises in Irish and European travel—immersive itineraries beyond standard checklists, connecting you with authentic culture, landscapes, and history across the Emerald Isle and Europe.
       </p>
 
       <h3 className="sd-h3">Ireland — the Emerald Isle</h3>

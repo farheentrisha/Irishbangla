@@ -104,14 +104,14 @@ export default function AboutUs({ onEnquiryClick }) {
         </div>
 
         <div className="about-content">
-          <p className="about-kicker">About Irish Bangla</p>
+          <p className="about-kicker">About Irish Center</p>
 
           <h2 id="about-heading" className="about-editorial">
             One-stop travel solution to the <em className="about-emerald">Emerald Isle</em> — for travellers from any country.
           </h2>
 
           <p className="about-lead">
-            Irish Bangla Tours &amp; Travels is headquartered in <strong>Ireland</strong> (Dublin) with an international presence across{" "}
+            Irish Center Tours &amp; Travels is headquartered in <strong>Ireland</strong> (Dublin) with an international presence across{" "}
             <strong>multiple countries</strong>. We support travellers worldwide with trip planning for <strong>Ireland</strong> (and Europe) — tours, stays, and
             practical visa guidance in one place.
           </p>

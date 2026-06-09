@@ -42,7 +42,7 @@ export default function Footer() {
 
         {/* Location 1 */}
         <div className="footer-col">
-          <h4>Irish Bangla – Dhaka</h4>
+          <h4>Irish Center – Dhaka</h4>
           <p>
             3rd Floor, Road: 11, House: 76/A <br />
             Banani, Dhaka
@@ -52,7 +52,7 @@ export default function Footer() {
             href="https://www.google.com/maps/search/?api=1&query=House%2076%2FA%2C%20Road%2011%2C%20Banani%2C%20Dhaka"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View Irish Bangla Dhaka on Google Maps"
+            aria-label="View Irish Center Dhaka on Google Maps"
           >
             <FaMapMarkerAlt /> View Location
           </a>
@@ -60,7 +60,7 @@ export default function Footer() {
 
         {/* Location 2 */}
         <div className="footer-col">
-          <h4>Irish Bangla – Dublin</h4>
+          <h4>Irish Center – Dublin</h4>
           <p>
             North Wall Quay, <br />
             Dublin 1, Ireland
@@ -70,7 +70,7 @@ export default function Footer() {
             href="https://www.google.com/maps/search/?api=1&query=North%20Wall%20Quay%2C%20Dublin%201%2C%20Ireland"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="View Irish Bangla Dublin on Google Maps"
+            aria-label="View Irish Center Dublin on Google Maps"
           >
             <FaMapMarkerAlt /> View Location
           </a>
@@ -100,7 +100,7 @@ export default function Footer() {
 
       {/* Copyright */}
       <div className="footer-bottom">
-        © {new Date().getFullYear()} Irish Bangla. All Rights Reserved.
+        © {new Date().getFullYear()} Irish Center. All Rights Reserved.
       </div>
     </footer>
   );
