@@ -420,11 +420,28 @@
 }
 
 .booktrip-globe__canvas {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   background: #ffffff;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 2;
+}
+
+.booktrip-globe__canvas.is-ready {
+  opacity: 1;
+}
+
+.booktrip-globe__placeholder {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #eef1f3 0%, #c5cdd4 45%, #9aa6b2 100%);
+  z-index: 1;
 }
 
 .booktrip-globe__shade {

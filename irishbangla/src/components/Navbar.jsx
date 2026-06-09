@@ -128,8 +128,7 @@ export default function Navbar() {
     () =>
       serviceTopics.map((t) => ({
         to: `/services/${t.slug}`,
-        title: t.title,
-        description: t.menuDescription,
+        label: t.title,
       })),
     []
   );
@@ -329,7 +328,7 @@ export default function Navbar() {
 
           {/* SERVICES */}
           <li
-            className={`nav-item services${servicesOpen ? " open" : ""}`}
+            className={`nav-item info services${servicesOpen ? " open" : ""}`}
             onMouseEnter={handleServicesEnter}
             onMouseLeave={handleServicesLeave}
             onClick={handleServicesClick}
@@ -339,7 +338,7 @@ export default function Navbar() {
               <FaChevronDown className={`dropdown-arrow ${servicesOpen ? "open" : ""}`} />
             </span>
             <div
-              className={`mega-menu${servicesOpen ? " open" : ""}`}
+              className={`info-menu info-menu--services${servicesOpen ? " open" : ""}`}
               onMouseEnter={() => {
                 if (isMobile()) return;
                 clearTimeout(servicesCloseTimer.current);
@@ -351,15 +350,14 @@ export default function Navbar() {
                   key={item.to}
                   to={item.to}
                   className={({ isActive }) =>
-                    isActive ? "mega-item active" : "mega-item"
+                    isActive ? "info-link active" : "info-link"
                   }
                   onClick={(e) => {
                     e.stopPropagation();
                     closeNavigation();
                   }}
                 >
-                  <span className="mega-item-title">{item.title}</span>
-                  <span className="mega-item-desc">{item.description}</span>
+                  {item.label}
                 </NavLink>
               ))}
             </div>
